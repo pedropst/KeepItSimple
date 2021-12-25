@@ -21,3 +21,8 @@ Essa página também possui a configuração para a quantidade de botões que se
      <li>A partir do acelerômetro do aparelho, determinar quedas e então ligar automaticamente para o número de emergência?</li>
      <li>Conseguir configurar os botões de maneira remota a partir de outro aparelho, por meio de um código de identificação e confirmação no aparelho que será configurado. Óbvio que para aparelhos que estão conectados a internet.</li>
 </ul>
+
+
+<span>
+<img src= "https://github.com/pedropst/KeepItSimple/blob/main/home_print.png?raw=true"><img src="https://github.com/pedropst/KeepItSimple/blob/main/settings_print.png?raw=true">
+</span>
