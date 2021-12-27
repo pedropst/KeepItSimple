@@ -7,7 +7,7 @@ Essa página também possui a configuração para a quantidade de botões que se
 
 <h2> O que ainda será feito: </h2>
 <ul>
-    <li>Permitir configurar os botões em 2 tipos de funcionalidade: abrir app default do android, abrir apps de terceiro, configurações do aparelho como: Wifi, 3G, GPS, BT, etc.</li>
+    <li>Permitir configurar os botões em 3 tipos de funcionalidade: abrir app default do android, abrir apps de terceiro, configurações do aparelho como: Wifi, 3G, GPS, BT, etc.</li>
     <li>Também será possível configurar os leading icons - as imagens - dos botões.</li>
     <li>Fazer com que o tamanho dos leading icons mude conforme a quantidade de botões presentes.</li>
     <li>Adicionar o pop-up de permissão, para acessar ao app default de ligação. Atualmente, é necessário ativar essa permissão, indo na configuração do smartphone, selecionar as configurações de apps, selecionar o aplicativo e então permitir.</li>
