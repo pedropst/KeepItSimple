@@ -1,10 +1,12 @@
-package com.pedropst.ajudaidoso
+package com.pedropst.KeepItSimple
 
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -13,6 +15,7 @@ import android.widget.Space
 class MainActivity : AppCompatActivity() {
     val CALL_PERMISSION_CODE = 1
     var lastRowId = 3
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,20 +40,22 @@ class MainActivity : AppCompatActivity() {
 
         callButton.setOnClickListener {
             val callIntent = Intent(Intent.ACTION_DIAL)
-            if(callIntent != null)
-            {
-                startActivity(callIntent)
-            }
+            startActivity(callIntent)
         }
 
         emergencyButton.setOnClickListener{
             val sharedPref = getSharedPreferences("MyPref", MODE_PRIVATE)
-            val number = sharedPref.getString("emergNum", null).toString()
+            val number = sharedPref.getString("emergNum", "").toString()
+            if(number != "")
+            {
+                val callIntent = Intent(Intent.ACTION_CALL)
 
-            val callIntent = Intent(Intent.ACTION_CALL)
-
-            callIntent.data = Uri.parse("tel:" + number)
-            startActivity(callIntent)
+                callIntent.data = Uri.parse("tel:" + number)
+                startActivity(callIntent)
+            }else{
+                val callIntent = Intent(Intent.ACTION_DIAL)
+                startActivity(callIntent)
+            }
         }
 
         whatsButton.setOnClickListener{
@@ -64,22 +69,34 @@ class MainActivity : AppCompatActivity() {
         smsButton.setOnClickListener{
             val smsIntent = Intent(Intent.ACTION_MAIN)
             smsIntent.addCategory(Intent.CATEGORY_APP_MESSAGING)
-            if(smsIntent != null)
-            {
-                startActivity(smsIntent)
-            }
+            startActivity(smsIntent)
         }
 
         settingsButton.setOnClickListener {
                 val settingsIntent = Intent(this, Settings::class.java)
                 startActivity(settingsIntent)
         }
+
+        val dr = gettingAllButtons()
+    }
+
+    private fun gettingAllButtons() : MutableList<Button> {
+        var buttonList = mutableListOf<Button>()
+        for(i in 1..6){
+            for(j in 0..1){
+                val buttonID = resources.getIdentifier("button$i$j", "id", packageName)
+                val button = findViewById<Button>(buttonID)
+                buttonList.add(button)
+            }
+        }
+
+        return buttonList
     }
 
     private fun addingButton(btnCount : Int){
         if(btnCount > 6)
         {
-            var odd = false
+            val odd: Boolean
             if(btnCount % 2 == 0){
                 lastRowId = btnCount / 2
                 odd = false
@@ -88,8 +105,7 @@ class MainActivity : AppCompatActivity() {
                 odd = true
             }
 
-            for(i in 4..lastRowId)
-            {
+            for(i in 4..lastRowId){
                 val layoutID = resources.getIdentifier("row$i", "id", packageName)
                 val newRow = findViewById<LinearLayout>(layoutID)
 
@@ -125,36 +141,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createButtonDynamically() {
-        // creating the button
-        val newButton = Button(this)
-        val newLinearLayout = LinearLayout(this)
-
-        newLinearLayout.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-
-        newLinearLayout.orientation = LinearLayout.HORIZONTAL
-//      newLinearLayout.id = "@+id/teste1".toInt()
-
-        // setting layout_width and layout_height using layout parameters
-        newButton.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        newButton.text = "Dynamic Button"
-        newButton.setBackgroundColor(Color.GREEN)
-        // add Button to LinearLayout
-
-        val mainLayout = findViewById<LinearLayout>(R.id.teste)
-        mainLayout.addView(newLinearLayout)
-        newLinearLayout.addView(newButton)
-    }
-
-
-    private fun loadBtnCount() : String
-    {
+    private fun loadBtnCount() : String {
         val sharedPref = getSharedPreferences("MyPref", MODE_PRIVATE)
         return if(sharedPref.getString("btnCount", "6") == null) {
             ""

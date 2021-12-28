@@ -1,18 +1,13 @@
-package com.pedropst.ajudaidoso
+package com.pedropst.KeepItSimple
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class Settings : AppCompatActivity(), AdapterView.OnItemSelectedListener{
-    var lastRowId = 3;
+    val listOfAndroidDefaultApps = listOf<String>("discar", "mensagens")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +25,6 @@ class Settings : AppCompatActivity(), AdapterView.OnItemSelectedListener{
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter }
 
-
         loadData(emergencyNumberField, spinner)
 
         applyButton.setOnClickListener{
@@ -39,11 +33,6 @@ class Settings : AppCompatActivity(), AdapterView.OnItemSelectedListener{
             val homeIntent = Intent(this, MainActivity::class.java)
             startActivity(homeIntent)
         }
-
-//        val addingButtons = findViewById<Button>(R.id.addingButtons)
-//        addingButtons.setOnClickListener{
-//            addingButton()
-//        }
     }
 
     private fun saveData(emergencyNumberField : TextView, btnCount : Spinner){
@@ -63,23 +52,6 @@ class Settings : AppCompatActivity(), AdapterView.OnItemSelectedListener{
         val sharedPref = getSharedPreferences("MyPref", MODE_PRIVATE)
         emergencyNumberField.text = sharedPref.getString("emergNum", null)
         btnCount.setSelection(sharedPref.getInt("btnCountPos", 0))
-    }
-
-    private fun addingButton(){
-        if(lastRowId + 1 <= 6)
-        {
-            lastRowId++
-            val id = resources.getIdentifier("row$lastRowId", "id", packageName)
-            val newRow = findViewById<LinearLayout>(id)
-
-            newRow.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                1f
-            )
-            newRow.visibility = View.VISIBLE
-
-        }
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

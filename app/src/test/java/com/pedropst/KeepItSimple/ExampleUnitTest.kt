@@ -1,4 +1,4 @@
-package com.pedropst.ajudaidoso
+package com.pedropst.KeepItSimple
 
 import org.junit.Test
 

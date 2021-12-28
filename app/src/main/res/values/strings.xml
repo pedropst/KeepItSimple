@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AjudaIdoso</string>
+    <string name="app_name">KeepItSimple</string>
 
     <string-array name="btnCount">
         <item>6</item>
