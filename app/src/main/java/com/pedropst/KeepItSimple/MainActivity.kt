@@ -8,9 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Space
+import androidx.compose.ui.Modifier
+import android.content.pm.ApplicationInfo
+
+import android.content.pm.PackageManager
 
 class MainActivity : AppCompatActivity() {
     val CALL_PERMISSION_CODE = 1
@@ -27,6 +32,19 @@ class MainActivity : AppCompatActivity() {
         val whatsButton = findViewById<Button>(R.id.button21)
         val settingsButton = findViewById<Button>(R.id.button30)
         val emergencyButton = findViewById<Button>(R.id.button31)
+
+
+//        val pm = packageManager
+////get a list of installed apps.
+////get a list of installed apps.
+//        val packages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
+//
+//        for (packageInfo in packages) {
+//            Log.d("TAG1", "Installed package :" + packageInfo.packageName)
+//            Log.d("TAG2", "Source dir : " + packageInfo.sourceDir)
+//            Log.d("TAG3", "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName))
+//        }
+//// the getLaunchIntentForPackage returns an intent that you can use with startActivity()
 
 
         val btnCount = loadBtnCount().toInt()
